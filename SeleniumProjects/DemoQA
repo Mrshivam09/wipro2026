@@ -1,1 +1,75 @@
+package webdriver_package;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.JavascriptExecutor;
 
+public class DemoQA {
+
+    public static void main(String[] args) throws InterruptedException {
+
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://demoqa.com/automation-practice-form");
+        driver.manage().window().maximize();
+        driver.findElement(By.id("firstName")).sendKeys("Shivam");
+        driver.findElement(By.id("lastName")).sendKeys("Pal");
+        driver.findElement(By.id("userEmail")).sendKeys("shivam09@gmail.com");
+
+        
+        driver.findElement(By.xpath("//label[@for='gender-radio-1']")).click();
+        driver.findElement(By.id("userNumber")).sendKeys("9887542567");
+        driver.findElement(By.id("dateOfBirthInput")).click();
+        WebElement year = driver.findElement(
+                By.className("react-datepicker__year-select"));
+
+        Select yr = new Select(year);
+        yr.selectByVisibleText("2000");
+        WebElement month = driver.findElement( By.className("react-datepicker__month-select"));
+        Select mt = new Select(month);
+        mt.selectByVisibleText("August");
+        driver.findElement(By.xpath("//div[contains(@class,'react-datepicker__day--015')]"))
+                .click();
+
+        
+        WebElement sub = driver.findElement(By.id("subjectsInput"));
+        sub.sendKeys("Maths");
+        sub.sendKeys(Keys.ENTER);
+
+        sub.sendKeys("English");
+        sub.sendKeys(Keys.ENTER);
+
+        
+        WebElement sports = driver.findElement(By.id("hobbies-checkbox-1"));
+
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].click();", sports);
+        
+        WebElement img=driver.findElement(By.id("uploadPicture"));
+        img.sendKeys("C:\\Users\\shiva\\Downloads\\technology.jpg");
+        
+        js.executeScript("window.scrollBy(0,900)");       
+        driver.findElement(By.id("currentAddress")).sendKeys("Noida 52 Uttar Pradesh, INDIA");
+     /*   WebElement address=driver.findElement(By.id("currentAddress"));
+		address.click();
+		address.sendKeys("Uttar Pradesh,INDIA");*/
+		
+		WebElement state = driver.findElement(By.id("react-select-3-input"));
+
+		state.sendKeys("Uttar Pradesh");
+		state.sendKeys(Keys.ENTER);
+
+		WebElement city = driver.findElement(By.id("react-select-4-input"));
+
+		city.sendKeys("Agra");
+		city.sendKeys(Keys.ENTER);
+		WebElement submit=driver.findElement(By.id("submit"));
+		submit.click();
+		Thread.sleep(10000);
+		driver.quit();
+	}
+
+}
