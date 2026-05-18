@@ -1,1 +1,97 @@
+package webdriver_package;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.JavascriptExecutor;
+
+public class BlogSpotAutomation {
+
+    public static void main(String[] args) throws InterruptedException {
+
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://testautomationpractice.blogspot.com/");
+       WebElement name=driver.findElement(By.id("name"));
+       name.sendKeys("Shivam Pal");
+       WebElement email=driver.findElement(By.id("email"));
+       email.sendKeys("shivam09@gmail.com");
+       WebElement phone=driver.findElement(By.id("phone"));
+       phone.sendKeys("9387352839");
+       WebElement address=driver.findElement(By.id("textarea"));
+       address.sendKeys("Noida 62 a block UP");
+       driver.findElement(By.id("male")).click();
+
+       
+       driver.findElement(By.id("sunday")).click();
+       driver.findElement(By.id("monday")).click();
+       driver.findElement(By.id("friday")).click();
+
+       
+       WebElement country = driver.findElement(By.id("country"));
+
+       Select sc = new Select(country);
+       sc.selectByVisibleText("India");
+
+       
+       WebElement colors = driver.findElement(By.id("colors"));
+
+       Select clr = new Select(colors);
+
+       clr.selectByVisibleText("Red");
+       clr.selectByVisibleText("Blue");
+       clr.selectByVisibleText("Green");
+
+      
+       WebElement animals = driver.findElement(By.id("animals"));
+
+       Select an = new Select(animals);
+
+       an.selectByVisibleText("Cat");
+       an.selectByVisibleText("Dog");
+
+      
+       WebElement date1 = driver.findElement(By.id("datepicker"));
+       date1.sendKeys("05/16/2026");
+
+       // Date Picker 2
+       WebElement date2 = driver.findElement(By.id("txtDate"));
+       date2.sendKeys("16/05/2026");
+
+       
+       WebElement startdate = driver.findElement(By.id("start-date"));
+       startdate.sendKeys("16-05-2026");
+
+       WebElement enddate = driver.findElement(By.id("end-date"));
+       enddate.sendKeys("20-05-2026");
+
+       
+       WebElement submit = driver.findElement(By.xpath("//button[text()='Submit']"));
+
+       JavascriptExecutor js = (JavascriptExecutor) driver;
+       js.executeScript("arguments[0].click();", submit);
+
+      
+       driver.findElement(By.id("alertBtn")).click();
+       Thread.sleep(2000);
+       driver.switchTo().alert().accept();
+
+       
+       driver.findElement(By.id("confirmBtn")).click();
+       Thread.sleep(2000);
+       driver.switchTo().alert().accept();
+
+       
+       driver.findElement(By.id("promptBtn")).click();
+       Thread.sleep(2000);
+
+       driver.switchTo().alert().sendKeys("Hello Shivam");
+       driver.switchTo().alert().accept();
+
+       Thread.sleep(2000);
+       driver.quit();
+    }
+}
 
